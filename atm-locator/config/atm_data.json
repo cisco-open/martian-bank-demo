@@ -1,0 +1,301 @@
+[
+  {
+    "_id": { "$oid": "64a6f1cc8c1899820dbdf25a" },
+    "name": "Martian ATM (Highway)",
+    "address": {
+      "street": "14th Street, Martian Way",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.775, "longitude": -81.188 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "10:00 AM - 3:00 PM",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 2,
+    "isOpen": true,
+    "createdAt": { "$date": "2023-07-06T16:54:36.22Z" },
+    "updatedAt": { "$date": "2023-07-06T16:54:36.22Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64a6f2268c1899820dbdf25c" },
+    "name": "Martian ATM (Claytor Lake)",
+    "address": {
+      "street": "234, Highlander Road",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.775, "longitude": -81.1875 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "Closed on weekends",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 1,
+    "isOpen": false,
+    "createdAt": { "$date": "2023-07-06T16:56:06.095Z" },
+    "updatedAt": { "$date": "2023-07-06T16:56:06.095Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64a6f2d18c1899820dbdf25e" },
+    "name": "Martian ATM (Musk Center)",
+    "address": {
+      "street": "17th Musk Rd",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.765, "longitude": -81.1885 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "10:00 AM - 3:00 PM",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 4,
+    "isOpen": true,
+    "createdAt": { "$date": "2023-07-06T16:58:57.179Z" },
+    "updatedAt": { "$date": "2023-07-06T16:58:57.179Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64a6f3398c1899820dbdf260" },
+    "name": "Martian ATM (Rocket Launchpad)",
+    "address": {
+      "street": "Martian Rocker Launcher",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.77, "longitude": -81.1883 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "10:00 AM - 3:00 PM",
+      "holidays": "10:00 AM - 3:00 PM"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 4,
+    "isOpen": true,
+    "createdAt": { "$date": "2023-07-06T17:00:41.542Z" },
+    "updatedAt": { "$date": "2023-07-06T17:00:41.542Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64a6f3838c1899820dbdf262" },
+    "name": "Martian ATM (Courthouse)",
+    "address": {
+      "street": "Mars Courthouse",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.776, "longitude": -81.1923 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "10:00 AM - 3:00 PM",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 3,
+    "isOpen": true,
+    "createdAt": { "$date": "2023-07-06T17:01:55.592Z" },
+    "updatedAt": { "$date": "2023-07-06T17:01:55.592Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64a6f3b58c1899820dbdf264" },
+    "name": "Martian ATM (Theater)",
+    "address": {
+      "street": "23, National Theater",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.778, "longitude": -81.1926 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "10:00 AM - 3:00 PM",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 2,
+    "isOpen": false,
+    "createdAt": { "$date": "2023-07-06T17:02:45.324Z" },
+    "updatedAt": { "$date": "2023-07-06T17:02:45.324Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64a6f40b8c1899820dbdf266" },
+    "name": "Martian ATM (Oak Hill)",
+    "address": {
+      "street": "Rover Road",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.769, "longitude": -81.1897 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "10:00 AM - 3:00 PM",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 3,
+    "isOpen": true,
+    "createdAt": { "$date": "2023-07-06T17:04:11.271Z" },
+    "updatedAt": { "$date": "2023-07-06T17:04:11.271Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64a6f4498c1899820dbdf268" },
+    "name": "Martian ATM (Beckley Main)",
+    "address": {
+      "street": "511 Naivelle Road",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.767, "longitude": -81.1904 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "10:00 AM - 3:00 PM",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 2,
+    "isOpen": true,
+    "createdAt": { "$date": "2023-07-06T17:05:13.355Z" },
+    "updatedAt": { "$date": "2023-07-06T17:05:13.355Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64a6f4a58c1899820dbdf26a" },
+    "name": "Martian ATM (The Exchange)",
+    "address": {
+      "street": "470, 16th Street",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.765, "longitude": -81.1877 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "Closed on weekends",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 2,
+    "isOpen": true,
+    "createdAt": { "$date": "2023-07-06T17:06:45.481Z" },
+    "updatedAt": { "$date": "2023-07-06T17:06:45.481Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64a6f4d28c1899820dbdf26c" },
+    "name": "Martian ATM (The Flats)",
+    "address": {
+      "street": "471, 16th Street",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.764, "longitude": -81.1897 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "Closed on weekends",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 2,
+    "isOpen": false,
+    "createdAt": { "$date": "2023-07-06T17:07:30.883Z" },
+    "updatedAt": { "$date": "2023-07-06T17:07:30.883Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64ac747deaa5c8310cb21a1b" },
+    "name": "Martian ATM (The Mark)",
+    "address": {
+      "street": "630, 14th Street",
+      "city": "Musk City",
+      "state": "Mars",
+      "zip": "40411"
+    },
+    "coordinates": { "latitude": 37.76, "longitude": -81.1877 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "10:00 AM - 2:00 PM",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 1,
+    "isOpen": true,
+    "createdAt": { "$date": "2023-07-10T21:13:33.658Z" },
+    "updatedAt": { "$date": "2023-07-10T21:13:33.658Z" },
+    "__v": 0,
+    "interPlanetary": false
+  },
+  {
+    "_id": { "$oid": "64b072fd6981fda9e346bdde" },
+    "name": "Earthern ATM (Georgia Tech)",
+    "address": {
+      "street": "470, 16th Street",
+      "city": "Atlanta",
+      "state": "Georgia",
+      "zip": "30363"
+    },
+    "coordinates": { "latitude": -94.764, "longitude": 31.1897 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "10:00 AM - 3:00 PM",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 4,
+    "isOpen": true,
+    "createdAt": { "$date": "2023-07-13T21:56:13.652Z" },
+    "updatedAt": { "$date": "2023-07-13T21:56:13.652Z" },
+    "__v": 0,
+    "interPlanetary": true
+  },
+  {
+    "_id": { "$oid": "64b0735f6981fda9e346bde0" },
+    "name": "Saturn ATM (Mimas Moon)",
+    "address": {
+      "street": "Outer ring",
+      "city": "Mimas",
+      "state": "Saturn",
+      "zip": "100"
+    },
+    "coordinates": { "latitude": -94.764, "longitude": 31.1897 },
+    "timings": {
+      "monFri": "9:00 AM - 5:00 PM",
+      "satSun": "10:00 AM - 3:00 PM",
+      "holidays": "Closed on holidays"
+    },
+    "atmHours": "24 hours",
+    "numberOfATMs": 3,
+    "isOpen": true,
+    "createdAt": { "$date": "2023-07-13T21:57:51.67Z" },
+    "updatedAt": { "$date": "2023-07-13T21:57:51.67Z" },
+    "__v": 0,
+    "interPlanetary": true
+  }
+]

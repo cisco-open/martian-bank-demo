@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-martianbank
+data:
+    DB_URL: "mongodb://root:example@mongodb:27017"
+    JWT_SECRET: ""
+# Set any string as a JWT_SECRET for generating and verifying JWT tokens.

@@ -1,0 +1,58 @@
+// Copyright (c) 2023 Cisco Systems, Inc. and its affiliates All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+message TransactionRequest {
+  string sender_account_number = 1;
+  string sender_account_type = 2;
+  string receiver_account_number = 3;
+  string receiver_account_type = 4;
+  double amount = 5;
+  string reason= 6;
+}
+
+message TransactionResponse {
+  // string result = 1;
+  bool approved = 1;
+  // string  = 2;
+  string message = 2;
+}
+
+message GetALLTransactionsRequest{
+  string account_number = 1;
+}
+
+message Transaction{
+  string account_number=1;
+  double amount = 2;
+  string reason=3;
+  string time_stamp = 4;
+  string type = 5;
+  string transaction_id = 6;
+}
+
+message GetALLTransactionsResponse{
+  repeated Transaction transactions = 1;
+}
+
+
+message ZelleRequest {
+  string sender_email = 1;
+  string receiver_email = 2;
+  double amount = 3;
+  string reason= 4;
+}
+
+message TransactionByIDRequest{
+  string transaction_id = 1;
+}
+
+
+service TransactionService {
+  rpc sendMoney(TransactionRequest) returns (TransactionResponse);
+  rpc getTransactionsHistory(GetALLTransactionsRequest) returns (GetALLTransactionsResponse);
+  rpc Zelle(ZelleRequest) returns (TransactionResponse);
+  rpc getTransactionByID(TransactionByIDRequest) returns (Transaction);
+}

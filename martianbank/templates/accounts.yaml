@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts
+  labels:
+    app: accounts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: accounts
+  template:
+    metadata:
+      labels:
+        app: accounts
+    spec:
+      containers:
+        - name: accounts
+          image: docker.io/waris95/martian-bank-accounts
+          envFrom:
+            - configMapRef:
+                name: configmap-martianbank
+          env:
+            - name: SERVICE_PROTOCOL
+              value: {{.Values.SERVICE_PROTOCOL}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: accounts
+spec:
+  selector:
+    app: accounts
+  ports:
+    - protocol: TCP
+      port: 50051
+      targetPort: 50051

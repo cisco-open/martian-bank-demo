@@ -1,0 +1,342 @@
+# Copyright (c) 2023 Cisco Systems, Inc. and its affiliates All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+# You can tell Kubernetes how to identify your microservice by using labels
+
+# UI
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: ui
+    labels:
+        app: ui
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: ui
+    template:
+        metadata:
+            labels:
+                app: ui
+        spec:
+            containers:
+                - name: ui
+                  image: docker.io/jashmehta3300/martian-bank-ui
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: dashboard
+    labels:
+        app: dashboard
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: dashboard
+    template:
+        metadata:
+            labels:
+                app: dashboard
+        spec:
+            containers:
+                - name: dashboard
+                  image: docker.io/waris95/martian-bank-dashboard
+                  env:
+                      - name: ACCOUNT_HOST
+                        value: accounts
+                      - name: LOAN_HOST
+                        value: loan
+                      - name: TRANSACTION_HOST
+                        value: transactions
+  
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: accounts
+    labels:
+        app: accounts
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: accounts
+    template:
+        metadata:
+            labels:
+                app: accounts
+        spec:
+            containers:
+                - name: accounts
+                  image: docker.io/waris95/martian-bank-accounts
+# loan 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: loan
+    labels:
+        app: loan
+spec: 
+    replicas: 1
+    selector:
+        matchLabels:
+            app: loan
+    template:
+        metadata:
+            labels:
+                app: loan
+        spec:
+            containers:
+                - name: loan
+                #   registry: docker.io
+                  image: docker.io/waris95/martian-bank-loan
+
+# transactions
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: transactions
+    labels:
+        app: transactions
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: transactions
+    template:
+        metadata:
+            labels:
+                app: transactions
+        spec:
+            containers:
+                - name: transactions
+                  image: docker.io/waris95/martian-bank-transactions
+
+
+# customer-auth
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: customer-auth
+    labels:
+        app: customer-auth
+spec:    
+    replicas: 1
+    selector:
+        matchLabels:
+            app: customer-auth
+    template:
+        metadata:
+            labels:
+                app: customer-auth
+        spec:
+            containers:
+                - name: customer-auth
+                  image: docker.io/jashmehta3300/martian-bank-customer-auth
+
+
+# atm-locator
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: atm-locator
+    labels:
+        app: atm-locator
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: atm-locator
+    template:
+        metadata:
+            labels:
+                app: atm-locator
+        spec:
+            containers:
+                - name: atm-locator
+                  image: docker.io/jashmehta3300/martian-bank-atm-locator
+
+# nginx
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: nginx
+    labels:
+        app: nginx
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: nginx
+    template:
+        metadata:
+            labels:
+                app: nginx
+        spec:
+            containers:
+                - name: nginx
+                  image: docker.io/jashmehta3300/martian-bank-nginx
+                  
+
+# make mongodb deployemnt  
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo-pod
+spec:
+  containers:
+    - name: mongo
+      image: mongo
+      env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: root
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: example
+      ports:
+        - containerPort: 27017
+          name: mongodb
+
+
+
+
+
+
+
+
+
+# Service 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: nginx
+spec:
+    type: LoadBalancer
+    selector:
+        app: nginx
+    ports:
+        - protocol: TCP
+          port: 80
+          targetPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: customer-auth
+spec:
+    selector:
+        app: customer-auth
+    ports:
+        - protocol: TCP
+          port: 8000
+          targetPort: 8000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: atm-locator
+spec:
+    selector:
+        app: atm-locator
+    ports:
+        - protocol: TCP
+          port: 8001
+          targetPort: 8001
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: ui
+spec:
+    type: LoadBalancer
+    selector:
+        app: ui
+    ports:
+        - protocol: TCP
+          port: 3000
+          targetPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: customer-auth
+spec:
+    selector:
+        app: customer-auth
+    ports:
+        - protocol: TCP
+          port: 8000
+          targetPort: 8000
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: dashboard
+spec:
+    type: LoadBalancer # This is the only line that is different from the previous service that this is accessible from outside
+    selector:
+        app: dashboard
+    ports:
+        - protocol: TCP
+          port: 5000
+          targetPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: accounts
+spec:
+    selector:
+        app: accounts
+    ports:
+        - protocol: TCP
+          port: 50051
+          targetPort: 50051
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: loan
+spec:
+    selector:
+        app: loan
+    ports:
+        - protocol: TCP
+          port: 50053
+          targetPort: 50053
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: transactions
+spec:
+    selector:
+        app: transactions
+    ports:
+        - protocol: TCP
+          port: 50052
+          targetPort: 50052

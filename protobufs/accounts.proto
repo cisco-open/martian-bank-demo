@@ -1,0 +1,72 @@
+// Copyright (c) 2023 Cisco Systems, Inc. and its affiliates All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+message Account {
+  string account_number = 1;
+  string email_id = 2;
+  string account_type = 3;
+  string address = 4;
+  string govt_id_number = 5;
+  string government_id_type = 6;
+  string name = 7;
+  string currency = 8;
+  double balance = 9;
+}
+
+
+message CreateAccountRequest {
+  string email_id = 1;
+  string account_type = 2;
+  string address = 3;
+  string govt_id_number = 4;
+  string government_id_type = 5;
+  string name = 6;
+}
+
+message CreateAccountResponse {
+  bool result = 1;
+}
+
+message GetAccountsRequest {
+  string email_id = 1;
+}
+
+message GetAccountsResponse {
+  repeated Account accounts = 1;
+}
+
+
+
+
+message AccountDetail{
+  string account_number = 1;
+  string name = 2;
+  double balance = 3;
+  string currency = 4;
+}
+
+message GetAccountDetailRequest {
+  string account_number = 1;
+}
+
+
+
+// message GetAccountDetailResponse {
+//   AccountDetail account = 1;
+// }
+
+
+
+
+
+service AccountDetailsService {
+  rpc getAccountDetails(GetAccountDetailRequest) returns (AccountDetail);
+  rpc createAccount(CreateAccountRequest) returns (CreateAccountResponse);
+  rpc getAccounts(GetAccountsRequest) returns (GetAccountsResponse);
+}
+
+
+

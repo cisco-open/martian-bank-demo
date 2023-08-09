@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--
+ Copyright (c) 2023 Cisco Systems, Inc. and its affiliates All rights reserved.
+ Use of this source code is governed by a BSD-style
+ license that can be found in the LICENSE file.
+-->
+
+<html>
+<head>
+    <title>Transaction Form</title>
+</head>
+<body>
+    <h1>Transaction Form</h1>
+    <form method="post" action="/transaction">
+        <label for="sender_account_number">Sender Account Number:</label>
+        <input type="text" name="sender_account_number" id="sender_account_number" required><br>
+
+        <label for="receiver_account_number">Receiver Account Number:</label>
+        <input type="text" name="receiver_account_number" id="receiver_account_number" required><br>
+
+        <label for="amount">Amount:</label>
+        <input type="text" name="amount" id="amount" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,140 @@
+# Copyright (c) 2023 Cisco Systems, Inc. and its affiliates All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+version: "3.9"
+
+services:
+  mongo:
+      image: mongo
+      restart: always
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: example
+      networks:
+      - bankapp-network
+
+  ui:
+    build:
+      context: ./ui
+    container_name: ui
+    hostname: ui
+    image: martian-bank-ui
+    ports:
+      - "3000:3000"
+    restart: always
+    env_file:
+      - ./ui/.env
+    networks:
+      - bankapp-network
+
+  nginx:
+    build: 
+      context: ./nginx
+    container_name: nginx
+    hostname: nginx
+    image: martian-bank-nginx
+    ports:
+      - "8080:8080"
+    depends_on:
+      - customer-auth
+      - atm-locator
+      - ui
+    restart: always
+    networks:
+      - bankapp-network
+
+  customer-auth:
+    build:
+      context: ./customer-auth
+    container_name: customer-auth
+    hostname: customer-auth
+    image: martian-bank-customer-auth
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./customer-auth/.env
+    restart: always
+    networks:
+      - bankapp-network
+
+  atm-locator:
+    build:
+      context: ./atm-locator
+    container_name: atm-locator
+    hostname: martian-bank-atm-locator
+    image: martian-bank-atm-locator
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./atm-locator/.env
+    restart: always
+    networks:
+      - bankapp-network
+  
+  dashboard:
+    container_name: dashboard
+    hostname: dashboard
+    ports:
+      - "5000:5000"
+    restart: always
+    image: martian-bank-dashboard
+    build:
+      context: .
+      dockerfile: dashboard/Dockerfile
+    environment:
+      ACCOUNT_HOST: accounts
+      TRANSACTION_HOST: transactions
+      LOAN_HOST: loan
+    networks:
+      - bankapp-network
+    
+  accounts:
+    build:
+      context: .
+      dockerfile: accounts/Dockerfile
+    container_name: accounts
+    hostname: accounts
+    image: martian-bank-accounts
+    restart: always
+    networks:
+      - bankapp-network
+
+  loan:
+    build:
+      context: .
+      dockerfile: loan/Dockerfile
+    container_name: loan
+    hostname: loan
+    image: martian-bank-loan
+    restart: always
+    networks:
+      - bankapp-network
+
+  transactions:
+    build:
+      context: .
+      dockerfile: transactions/Dockerfile
+    container_name: transactions
+    hostname: martian-bank-transactions
+    image: martian-bank-transactions
+    restart: always
+    networks:
+      - bankapp-network 
+
+  locust:
+    build:
+      context: .
+      dockerfile: performance_tests/locust/Dockerfile
+    container_name: locust
+    hostname: locust
+    ports:
+      - "8089:8089"
+    image: martian-bank-locust
+    restart: always
+    networks:
+      - bankapp-network
+
+networks:
+  bankapp-network:
+    driver: bridge

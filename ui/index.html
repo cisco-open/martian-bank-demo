@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+ Copyright (c) 2023 Cisco Systems, Inc. and its affiliates All rights reserved.
+ Use of this source code is governed by a BSD-style
+ license that can be found in the LICENSE file.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link id="icon" rel="icon" type="image/png" href="./src/assets/coin.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Martian Bank</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-image: radial-gradient(
+            circle,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.5)
+          ),
+          /* url(./src/assets/bank-background.jpg); */
+          url("https://via.placeholder.com/400x400");
+        background-size: 100% auto;
+        background-position: center;
+        background-repeat: repeat-y;
+        opacity: 0.9;
+      }
+
+      #root{
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
