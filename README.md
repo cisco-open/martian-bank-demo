@@ -432,6 +432,7 @@ bash stop_local.sh
 - Images for background, coin, card, and map.
 - Swagger docs for remaining endpoints
 - Blog posts and videos to support contributors
+- End-to-end and unit tests
 
 <br />
 
