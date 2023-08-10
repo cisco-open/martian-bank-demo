@@ -78,6 +78,8 @@ data:
 ```
 
 When running Docker or pods, use `"mongodb://root:example@mongodb:27017"` for the local database.
+
+**`NOTE:`** You can change the mongoDB password to some value other than `example` in the above URL. To do this, you can edit `/martianbank/templates/configmap.yaml`.
  
 ####  Step 2: Install MartianBank using Helm
 Now that you have the MartianBank repository downloaded, you can use Helm to install the app on your Kubernetes cluster.
@@ -367,9 +369,9 @@ By default loan, transaction and accounts microservices will run with http proto
 helm install martianbank martianbank --set SERVICE_PROTOCOL=grpc
 ```
 
-Additionally, you can flip between mongoDB local and mongoDB Atlas (cloud database instance). To switch to local mongo, use the following flag:
+Additionally, you can flip between mongoDB local and mongoDB Atlas (cloud database instance). To switch to mongoDB Atlas, use the following flag:
 ```bash
-helm install martianbank martianbank --set "mongodb.enabled=false"
+helm install martianbank martianbank --set "mongodb.enabled=true"
 ```
 
 By default, we use NGINX for reverse-proxy. If you want to deploy without NGINX, use this flag:
