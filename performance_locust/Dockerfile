@@ -5,8 +5,8 @@
 FROM --platform=linux/amd64 python
 
 RUN mkdir /service
-COPY . /service/locust/
-WORKDIR /service/locust
+COPY . /service/
+WORKDIR /service/
 RUN python -m pip install --upgrade pip
 RUN python -m pip install -r requirements.txt
 

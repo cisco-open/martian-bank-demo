@@ -124,7 +124,7 @@ services:
 
   locust:
     build:
-      context: ./performance_tests/locust
+      context: ./performance_locust
     container_name: locust
     hostname: locust
     ports:
