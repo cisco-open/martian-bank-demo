@@ -16,7 +16,7 @@ spec:
         spec:
             containers:
                 - name: ui
-                  image: docker.io/jashmehta3300/martian-bank-ui
+                  image: ghcr.io/cisco-open/martian-bank-demo-ui
                   env: 
                     {{- if .Values.nginx.enabled }}
                       - name: VITE_USERS_URL
@@ -79,7 +79,7 @@ spec:
         spec:
             containers:
                 - name: dashboard
-                  image: docker.io/jashmehta3300/martian-bank-dashboard
+                  image: ghcr.io/cisco-open/martian-bank-demo-dashboard
                   env:
                       - name: SERVICE_PROTOCOL
                         value: {{.Values.SERVICE_PROTOCOL}}
@@ -132,7 +132,7 @@ spec:
         spec:
             containers:
                 - name: customer-auth
-                  image: docker.io/jashmehta3300/martian-bank-customer-auth
+                  image: ghcr.io/cisco-open/martian-bank-demo-customer-auth
                   env:
                     {{- if not .Values.mongodb.enabled }}
                       - name: DATABASE_HOST
@@ -180,7 +180,7 @@ spec:
         spec:
             containers:
                 - name: atm-locator
-                  image: docker.io/jashmehta3300/martian-bank-atm-locator
+                  image: ghcr.io/cisco-open/martian-bank-demo-atm-locator
                   env:
                     {{- if not .Values.mongodb.enabled }}
                       - name: DATABASE_HOST
@@ -230,7 +230,7 @@ spec:
         spec:
             containers:
                 - name: nginx
-                  image: docker.io/jashmehta3300/martian-bank-nginx 
+                  image: ghcr.io/cisco-open/martian-bank-demo-nginx 
 ---
 apiVersion: v1
 kind: Service
@@ -247,6 +247,7 @@ spec:
 {{- end }}
 
 
+{{- if .Values.locust.enabled }}
 # locust
 ---
 apiVersion: apps/v1
@@ -267,7 +268,7 @@ spec:
         spec:
             containers:
                 - name: locust
-                  image: docker.io/jashmehta3300/martian-bank-locust
+                  image: ghcr.io/cisco-open/martian-bank-demo-locust
                   env:
                     - name: VITE_USERS_URL
                       value: http://customer-auth:8000/api/users
@@ -291,3 +292,4 @@ spec:
         - protocol: TCP
           port: 8098
           targetPort: 8098
+{{- end }}

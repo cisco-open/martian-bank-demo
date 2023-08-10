@@ -33,6 +33,8 @@ jobs:
             context: .
           - name: transactions
             context: .
+          - name: locust
+            context: .
 
     steps:
       - name: Checkout repository

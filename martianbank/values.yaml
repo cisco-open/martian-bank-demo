@@ -110,3 +110,9 @@ mongodb:
 
 SERVICE_PROTOCOL: "http"
 DB_URL:  
+
+#######################################################################################
+## Deploy locust
+
+locust: 
+  enabled: false
