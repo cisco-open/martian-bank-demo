@@ -6,6 +6,17 @@ MartianBank is a microservices demo application that simulates an app to allow c
 
 <br />
 
+# Hightlights
+
+- Micro Services Architecture  ​
+- Helm based configurable deployments options​ (eg switching between HTTP and GRPC)​
+- Docker, Kind and EKS based easy installations​
+- Swagger APIs and comprehensive documentation​
+- Performance tests and load generation capabilities​
+- Integration with other opensource projects like APIClarity
+
+<br />
+
 # Table of Contents
 - [Application Design](#application-design)
 - [Getting Started](#installation)
@@ -14,7 +25,6 @@ MartianBank is a microservices demo application that simulates an app to allow c
   - [Installation on KIND Cluster](#3-installatioin-on-kind-cluster)
   - [Installation on AWS EKS Cluster](#4-installation-on-aws-eks-cluster)
   - [Running Locally](#5-local-installation)
-- [Highlights](#highlights)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -75,7 +85,7 @@ data:
 
 When running Docker or pods, use `"mongodb://root:example@mongodb:27017"` for the local database.
 
-**`NOTE:`** You can change the mongoDB password to some value other than `example` in the above URL. To do this, you can edit `/martianbank/templates/configmap.yaml`.
+**`NOTE:`** We recommend to change the mongoDB password to some value other than `example` in the above URL. To do this, you can edit `/martianbank/templates/configmap.yaml`.
  
 ####  Step 2: Install MartianBank using Helm
 Now that you have the MartianBank repository downloaded, you can use Helm to install the app on your Kubernetes cluster.
@@ -414,18 +424,6 @@ Fire up `http://localhost:3000` to access the Martian Bank App.
 cd scripts
 bash stop_local.sh
 ```
-
-<br />
-
-# Hightlights
-
-- Micro Services Architecture  ​
-- Helm based configurable deployments options​ (eg switching between HTTP and GRPC)​
-- Docker, Kind and EKS based easy installations​
-- Swagger APIs and comprehensive documentation​
-- Performance tests and load generation capabilities​
-- ETI lab deployer with Panoptica​
-- Opensource
 
 <br />
 
