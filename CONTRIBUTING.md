@@ -15,13 +15,6 @@ any real-time space e.g., Slack, Discord, etc.
 
 - [Reporting Issues](#reporting-issues)
 - [Development](#development)
-<!-- - [Development](#development)
-  - [Generating API code](#generating-api-code)
-  - [Building MartianBank Binaries](#building-MartianBank-binaries)
-  - [Building MartianBank Containers](#building-MartianBank-containers)
-  - [Linting](#linting)
-  - [Unit Tests](#unit-tests)
-  - [Testing End to End](#testing-end-to-end) -->
 - [How to Contribute](#how-to-contribute)
   - [Table Of Contents](#table-of-contents)
   - [Reporting Issues](#reporting-issues)
@@ -32,7 +25,7 @@ any real-time space e.g., Slack, Discord, etc.
 ## Reporting Issues
 
 Before reporting a new issue, please ensure that the issue was not already reported or fixed by searching through our
-[issues list](https://github.com/warisgill/bankapp/issues).
+[issues list](https://github.com/cisco-open/martian-bank-demo/issues).
 
 When creating a new issue, please be sure to include a **title and clear description**, as much relevant information as
 possible, and, if possible, a test case.
