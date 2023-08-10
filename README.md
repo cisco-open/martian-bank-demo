@@ -1,12 +1,8 @@
-<!-- ![MartianBank](https://drive.google.com/uc?export=view&id=12EfkuXkXExd4pcUMo9ZKsIDP-3rK6Q2M) -->
-
 # MARTIAN BANK
 
 <br />
  
 MartianBank is a microservices demo application that simulates an app to allow customers to access and manage their bank accounts, perform financial transactions, locate ATMs, and apply for loans. It is built using [React](https://react.dev/),[ Node.js](https://nodejs.org/en/about), [Python](https://flask.palletsprojects.com/en/2.3.x/) and is packaged in [Docker](https://www.docker.com/) containers.  
-
-<!-- ![Screenshot](https://drive.google.com/uc?export=view&id=1BmbbL5GJyHRBCkUYH91K8GaJJxtiNz_q) -->
 
 <br />
 
