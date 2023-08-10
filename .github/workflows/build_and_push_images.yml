@@ -34,7 +34,7 @@ jobs:
           - name: transactions
             context: .
           - name: locust
-            context: .
+            context: ./performance_tests/locust
 
     steps:
       - name: Checkout repository

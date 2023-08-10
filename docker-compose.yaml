@@ -124,8 +124,7 @@ services:
 
   locust:
     build:
-      context: .
-      dockerfile: performance_tests/locust/Dockerfile
+      context: ./performance_tests/locust
     container_name: locust
     hostname: locust
     ports:
