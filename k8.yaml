@@ -23,7 +23,7 @@ spec:
         spec:
             containers:
                 - name: ui
-                  image: docker.io/jashmehta3300/martian-bank-ui
+                  image: ghcr.io/cisco-open/martian-bank-demo-ui
 
 ---
 apiVersion: apps/v1
@@ -44,7 +44,7 @@ spec:
         spec:
             containers:
                 - name: dashboard
-                  image: docker.io/waris95/martian-bank-dashboard
+                  image: ghcr.io/cisco-open/martian-bank-demo-dashboard
                   env:
                       - name: ACCOUNT_HOST
                         value: accounts
@@ -73,7 +73,7 @@ spec:
         spec:
             containers:
                 - name: accounts
-                  image: docker.io/waris95/martian-bank-accounts
+                  image: ghcr.io/cisco-open/martian-bank-demo-accounts
 # loan 
 ---
 apiVersion: apps/v1
@@ -95,7 +95,7 @@ spec:
             containers:
                 - name: loan
                 #   registry: docker.io
-                  image: docker.io/waris95/martian-bank-loan
+                  image: ghcr.io/cisco-open/martian-bank-demo-loan
 
 # transactions
 
@@ -118,7 +118,7 @@ spec:
         spec:
             containers:
                 - name: transactions
-                  image: docker.io/waris95/martian-bank-transactions
+                  image: ghcr.io/cisco-open/martian-bank-demo-transactions
 
 
 # customer-auth
@@ -142,7 +142,7 @@ spec:
         spec:
             containers:
                 - name: customer-auth
-                  image: docker.io/jashmehta3300/martian-bank-customer-auth
+                  image: ghcr.io/cisco-open/martian-bank-demo-customer-auth
 
 
 # atm-locator
@@ -165,7 +165,7 @@ spec:
         spec:
             containers:
                 - name: atm-locator
-                  image: docker.io/jashmehta3300/martian-bank-atm-locator
+                  image: ghcr.io/cisco-open/martian-bank-demo-atm-locator
 
 # nginx
 ---
@@ -187,7 +187,7 @@ spec:
         spec:
             containers:
                 - name: nginx
-                  image: docker.io/jashmehta3300/martian-bank-nginx
+                  image: ghcr.io/cisco-open/martian-bank-demo-nginx
                   
 
 # make mongodb deployemnt  
