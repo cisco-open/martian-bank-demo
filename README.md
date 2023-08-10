@@ -58,7 +58,7 @@ First, download the MartianBank GitHub repository using the following steps:
 
 2.  Clone the repository by running the command:
 ```bash
-git clone https://github.com/warisgill/bankapp
+git clone https://github.com/cisco-open/martian-bank-demo.git
 ```
 
 3.  Change to the downloaded repository directory using the command:
@@ -195,7 +195,7 @@ Before installing MartianBank, you need to have Helm installed on your local mac
 
 2.  Clone the MartianBank GitHub repository and navigate to the downloaded directory as mentioned in the previous tutorial.
 ```bash
-git clone https://github.com/warisgill/bankapp
+git clone https://github.com/cisco-open/martian-bank-demo.git
 cd bankapp
 ```
 
