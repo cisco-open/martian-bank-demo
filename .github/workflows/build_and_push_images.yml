@@ -33,7 +33,7 @@ jobs:
             context: .
           - name: transactions
             context: .
-          - name: locust
+          - name: performance_locust
             context: ./performance_locust
 
     steps:
