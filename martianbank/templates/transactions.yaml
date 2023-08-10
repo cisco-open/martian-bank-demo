@@ -18,7 +18,7 @@ spec:
         spec:
             containers:
                 - name: transactions
-                  image: docker.io/waris95/martian-bank-transactions
+                  image: ghcr.io/cisco-open/martian-bank-demo-transactions
                   envFrom:
                     - configMapRef:
                         name: configmap-martianbank
