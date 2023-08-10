@@ -36,7 +36,7 @@ MartianBank is a microservices demo application that simulates an app to allow c
 
 The Martian Bank UI is created using [React](https://react.dev/) and [react-redux toolkit](https://redux-toolkit.js.org/). There is an [NGINX](https://www.nginx.com/) container that acts as a reverse proxy for UI and backend services. There are 6 microservices, out of which 2 (customer-auth and atm-locator) are developed in Node.js whereas the others are done using Flask (Python). The dashboard microservice talks to accounts, transactions and loan microservices using [gRPC](https://grpc.io/) and [http](https://en.wikipedia.org/wiki/HTTP) (can be flipped and is available as a deployment parameter).
 
-![Architecture Diagram](https://drive.google.com/uc?export=view&id=1H1MKRLmcuIKKyXgcX7VRkL18ECJDyw3q)
+![Architecture Diagram](./images/Arch.png)
 
 <br />
 
