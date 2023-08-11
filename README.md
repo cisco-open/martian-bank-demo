@@ -409,9 +409,15 @@ kubectl delete all --all --namespace default
 
 **Option 1: Running on localhost**
 
-Before you start the installation, ensure that you have `.env` files setup inside all the microservices. 
+1. Clone the MartianBank GitHub repository and navigate to the downloaded directory.
+```bash
+git clone https://github.com/cisco-open/martian-bank-demo.git
+cd bankapp
+```
 
-1. To run all the microservices and UI:  
+2. Before you start the installation, ensure that you have `.env` files setup inside all the microservices. You need to create a `.env` file under these folders: `./customer-auth`, `./atm-locator`, `./dashboard`, `./accounts`, `./loan`, `./transactions`. 
+
+3. To run all the microservices and UI:  
 ```bash
 cd scripts
 bash run_local.sh
@@ -419,7 +425,7 @@ bash run_local.sh
 
 Fire up `http://localhost:3000` to access the Martian Bank App.
 
-2. To stop all the microservices:
+4. To stop all the microservices:
 ```bash
 cd scripts
 bash stop_local.sh
