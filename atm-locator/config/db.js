@@ -24,33 +24,6 @@ const connectDB = async () => {
       const conn = await mongoose.connect(
         `mongodb://${process.env.DATABASE_HOST}:27017/`
       );
-
-      console.log(`Seeding database with data from atm_data.json ...`);
-
-      const atmDataFile = join(
-        dirname(fileURLToPath(import.meta.url)),
-        "atm_data.json"
-      );
-      const rawData = fs.readFileSync(atmDataFile);
-      const jsonData = JSON.parse(rawData);
-      const processedData = jsonData.map((item) => ({
-        ...item,
-        _id: new mongoose.Types.ObjectId(item._id.$oid),
-        createdAt: new Date(item.createdAt.$date),
-        updatedAt: new Date(item.updatedAt.$date),
-      }));
-      try {
-        try {
-          await ATM.collection.drop();
-        }
-        catch (error) {
-          console.log(`Error: ${error.message}`.red.bold);
-        }
-        await ATM.insertMany(processedData);
-        console.log(`Database seeded with ${processedData.length} records.`);
-      } catch (error) {
-        console.log(`Error: ${error.message}`.red.bold);
-      }
     } else {
       console.log(
         `Connecting to MongoDB Atlas (Cloud) at ${process.env.DB_URL} ...`
@@ -62,6 +35,32 @@ const connectDB = async () => {
   } catch (error) {
     console.error(`Error: ${error.message}`.red.bold);
     process.exit(1);
+  }
+
+  console.log(`Seeding database with data from atm_data.json ...`);
+
+  const atmDataFile = join(
+    dirname(fileURLToPath(import.meta.url)),
+    "atm_data.json"
+  );
+  const rawData = fs.readFileSync(atmDataFile);
+  const jsonData = JSON.parse(rawData);
+  const processedData = jsonData.map((item) => ({
+    ...item,
+    _id: new mongoose.Types.ObjectId(item._id.$oid),
+    createdAt: new Date(item.createdAt.$date),
+    updatedAt: new Date(item.updatedAt.$date),
+  }));
+  try {
+    try {
+      await ATM.collection.drop();
+    } catch (error) {
+      console.log(`Error: ${error.message}`.red.bold);
+    }
+    await ATM.insertMany(processedData);
+    console.log(`Database seeded with ${processedData.length} records.`);
+  } catch (error) {
+    console.log(`Error: ${error.message}`.red.bold);
   }
 };
 
