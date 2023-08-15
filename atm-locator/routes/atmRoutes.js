@@ -13,8 +13,56 @@ import {
 
 const router = express.Router();
 
+/**
+ * @openapi
+ * /api/atm/:
+ *   post:
+ *     summary: Get all ATMs
+ *     description: Get a list of all ATMs according to the filters
+ *     tags:
+ *       - ATM
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               isOpenNow:
+ *                 type: boolean
+ *               isInterPlanetary:
+ *                 type: boolean
+ *     responses:
+ *       '200':
+ *         description: ATM details successfully fetched
+ *       '404':
+ *         description: Invalid request
+ */
 router.post("/", getATMs);
+
 router.post("/add", addATM);
+
+/**
+ * @openapi
+ * /api/atm/{id}:
+ *   get:
+ *     summary: Get ATM by ID
+ *     description: Get ATM details by ID
+ *     tags:
+ *        - ATM
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: ID of the ATM
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: ATM details successfully fetched
+ *       '404':
+ *         description: Invalid request
+ */
+
 router.get("/:id", getSpecificATM);
 
 export default router;
