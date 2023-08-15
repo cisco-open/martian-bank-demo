@@ -40,10 +40,9 @@ const ProfileScreen = () => {
     } else {
       try {
         const res = await updateProfile({
-          _id: userInfo._id,
-          name,
-          email,
-          password,
+          name: name,
+          email: email,
+          password: password,
           // token: Cookies.get("jwt"),
         }).unwrap();
         dispatch(setCredentials(res));

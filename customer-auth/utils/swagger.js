@@ -6,17 +6,30 @@
 
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
+import fs from "fs/promises";
+import yaml from "js-yaml";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const getYamlContent = async () => {
+  try {
+    const swaggerSpecsFile = join(
+      dirname(fileURLToPath(import.meta.url)),
+      "swagger.yaml"
+    );
+    const yamlContent = await fs.readFile(swaggerSpecsFile, "utf8");
+    return yamlContent;
+  } catch (error) {
+    console.error("Error reading file:", error);
+    throw error;
+  }
+};
+
+const parsedData = yaml.load(await getYamlContent());
 
 // Swagger options
 const swaggerOptions = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "customer-auth",
-      version: "1.0.0",
-      description: "API documentation for the customer-auth microservice",
-    },
-  },
+  definition: parsedData,
   apis: ["./routes/userRoutes.js"],
 };
 

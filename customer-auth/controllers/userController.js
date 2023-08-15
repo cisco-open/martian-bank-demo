@@ -76,7 +76,7 @@ const authUser = asyncHandler(async (req, res) => {
         email: user.email,
       });
     } else {
-      res.status(401);
+      res.status(400);
       throw new Error("Invalid email or password");
     }
   } catch (error) {
@@ -138,11 +138,11 @@ const logoutUser = (req, res) => {
 };
 
 // @desc    Get user profile
-// @route   GET api/users/profile
+// @route   POST api/users/profile
 // @access  Private
 const getUserProfile = asyncHandler(async (req, res) => {
   try {
-    const user = await User.findOne(req.email);
+    const user = await User.findOne({email: req.body.email});
 
     if (user) {
       res.json({
@@ -169,7 +169,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @access  Private
 const updateUserProfile = asyncHandler(async (req, res) => {
   try {
-    const user = await User.findOne(req.email);
+    const user = await User.findOne({email: req.body.email});
 
     if (user) {
       user.password = req.body.password || user.password;

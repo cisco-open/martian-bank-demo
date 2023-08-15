@@ -22,6 +22,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
+    "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.0",
     "loadtest": "^5.2.0",
     "mongoose": "^7.1.0",
