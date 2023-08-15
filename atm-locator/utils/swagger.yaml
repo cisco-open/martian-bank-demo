@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  title: atm-locator
+  version: 1.0.0
+  description: API documentation for the atm-locator microservice
+
+paths:
+  /api/atm/:
+    post:
+      summary: Get all ATMs
+      description: Get a list of all ATMs according to the filters
+      tags:
+        - ATM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isOpenNow:
+                  type: boolean
+                isInterPlanetary:
+                  type: boolean
+      responses:
+        "200":
+          description: ATM details successfully fetched
+        "404":
+          description: Invalid request
+
+  /api/atm/{id}:
+    get:
+      summary: Get ATM by ID
+      description: Get ATM details by ID
+      tags:
+        - ATM
+      parameters:
+        - name: id
+          in: path
+          description: ID of the ATM
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ATM details successfully fetched
+        "404":
+          description: Invalid request
