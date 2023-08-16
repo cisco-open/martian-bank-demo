@@ -13,6 +13,8 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import colors from "colors";
 
+import { swaggerDocs } from './utils/swagger.js';
+
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 import atmRoutes from "./routes/atmRoutes.js";
@@ -36,6 +38,9 @@ app.use(morgan("dev"));
 
 // mounting routes
 app.use("/api/atm", atmRoutes);
+
+// Swagger documentation
+swaggerDocs(app, port);
 
 // error handling middlewares
 app.use(notFound);
