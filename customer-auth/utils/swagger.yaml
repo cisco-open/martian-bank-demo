@@ -1,0 +1,132 @@
+openapi: 3.0.0
+info:
+  title: User Authentication and Profile API
+  description: API for user registration, authentication, and profile management
+  version: 1.0.0
+
+paths:
+  /api/users/:
+    post:
+      summary: Register a new user
+      description: Register a new user with the provided name, email, and password.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+      responses:
+        '200':
+          description: User successfully registered
+        '400':
+          description: Invalid user data or user already exists
+        '500':
+          description: Internal Server Error
+  /api/users/auth:
+    post:
+      summary: Authenticate user and get token
+      description: Authenticate a user with the provided email and password and retrieve an access token.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: User authenticated successfully
+        '400':
+          description: Invalid email or password
+        '500':
+          description: Internal Server Error
+  /api/users/logout:
+    post:
+      summary: Logout user and clear authentication
+      description: Logout the currently authenticated user and clear the JWT token from the request headers.
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: User logged out successfully
+        '500':
+          description: Internal Server Error
+  /api/users/profile:
+    post:
+      summary: Get user profile
+      description: Get the profile of the currently authenticated user.
+      tags:
+        - User Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+                - email
+      responses:
+        '200':
+          description: User profile retrieved successfully
+        '400':
+          description: User is not authenticated or the token is invalid
+        '404':
+          description: User is not found.
+        '500':
+          description: Internal Server Error
+    put:
+      summary: Update user profile
+      description: Update the profile of the currently authenticated user.
+      tags:
+        - User Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+      responses:
+        '200':
+          description: User profile updated successfully
+        '400':
+          description: Invalid request data or missing required fields
+        '404':
+          description: User is not found.
+        '500':
+          description: Internal Server Error
