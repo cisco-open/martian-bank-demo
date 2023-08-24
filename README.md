@@ -439,6 +439,8 @@ bash stop_local.sh
 - Swagger docs for remaining endpoints
 - Blog posts and videos to support contributors
 - End-to-end and unit tests
+- Injecting secrets securely
+- https and certificates support
 
 <br />
 
