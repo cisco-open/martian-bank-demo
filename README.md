@@ -204,7 +204,7 @@ Before installing MartianBank, you need to have Helm installed on your local mac
 2.  Clone the MartianBank GitHub repository and navigate to the downloaded directory as mentioned in the previous tutorial.
 ```bash
 git clone https://github.com/cisco-open/martian-bank-demo.git
-cd bankapp
+cd 
 ```
 
 **Step 5: Install MartianBank using Helm**
@@ -412,7 +412,7 @@ kubectl delete all --all --namespace default
 1. Clone the MartianBank GitHub repository and navigate to the downloaded directory.
 ```bash
 git clone https://github.com/cisco-open/martian-bank-demo.git
-cd bankapp
+cd martian-bank-demo
 ```
 
 2. Before you start the installation, ensure that you have `.env` files setup inside all the microservices. You need to create a `.env` file under these folders: `./customer-auth`, `./atm-locator`, `./dashboard`, `./accounts`, `./loan`, `./transactions`. 
