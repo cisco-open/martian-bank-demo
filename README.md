@@ -69,7 +69,7 @@ git clone https://github.com/cisco-open/martian-bank-demo.git
 
 3.  Change to the downloaded repository directory using the command:
 ```bash
-cd bankapp
+cd martian-bank-demo
 ```
 
 4.  Add the `configmap.yaml` config file to `martianbank/templates/` folder with the following content
