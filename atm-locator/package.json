@@ -20,7 +20,7 @@
     "express-async-handler": "^1.2.0",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.2.4",
+    "mongoose": "^7.5.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
     "swagger-jsdoc": "^6.2.8",
