@@ -415,9 +415,14 @@ git clone https://github.com/cisco-open/martian-bank-demo.git
 cd martian-bank-demo
 ```
 
-2. Before you start the installation, ensure that you have `.env` files setup inside all the microservices. You need to create a `.env` file under these folders: `./customer-auth`, `./atm-locator`, `./dashboard`, `./accounts`, `./loan`, `./transactions`. 
+2. Install mongodb locally and run it. Follow the steps here: https://www.mongodb.com/docs/manual/installation/
 
-3. To run all the microservices and UI:  
+3. Before you start with the MartianBank installation, ensure that you have `.env` files setup inside all the microservices. You need to create a `.env` file under these folders: `./customer-auth`, `./atm-locator`, `./dashboard`, `./accounts`, `./loan`, `./transactions`. Each `.env` file should look like this:
+```yaml
+DB_URL="your-database-connection-url"
+```
+
+4. To run all the microservices and UI:  
 ```bash
 cd scripts
 bash run_local.sh
@@ -425,7 +430,7 @@ bash run_local.sh
 
 Fire up `http://localhost:3000` to access the Martian Bank App.
 
-4. To stop all the microservices:
+5. To stop all the microservices:
 ```bash
 cd scripts
 bash stop_local.sh
