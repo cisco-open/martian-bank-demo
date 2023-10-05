@@ -174,8 +174,8 @@ const RegisterScreen = () => {
           <Row>
             <Col md={12} style={{ padding: "10vh", paddingTop: "0" }}>
               <img
-                // src="./src/assets/card.png"
-                src="https://via.placeholder.com/400x400"
+                src="./src/assets/card.png"
+                // src="https://via.placeholder.com/400x400"
                 alt="card"
                 className="img-fluid"
               />
