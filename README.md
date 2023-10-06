@@ -6,7 +6,7 @@ MartianBank is a microservices demo application that simulates an app to allow c
 
 <br />
 
-# Hightlights
+# Highlights
 
 - Micro Services Architecture  ​
 - Helm based configurable deployments options​ (eg switching between HTTP and GRPC)​
@@ -133,7 +133,7 @@ Look for the **EXTERNAL-IP** under the **_nginx_** microservice. This IP address
 ####  Step 5: Access MartianBank App
 Now that you have the URL (IP address) of the MartianBank app, you can access it using a web browser.
 1.  Copy the URL (IP address) from the **EXTERNAL-IP** field.
-2.  Paste the URL in your browser's address bar and press Enter to access the MartianBank app. For example, if the IP is `localhost`, simply paste `localhost` in the browser to access the MartianBank app.
+2.  Paste the URL in your browser's address bar, add the port (i.e. 8080) and press Enter to access the MartianBank app. For example, if the IP is `localhost`, simply put `localhost:8080` in the browser to access the MartianBank app. 
 
 Congratulations! You have successfully installed and accessed the MartianBank app on your Kubernetes cluster using Helm. Now you can explore and use the app as needed. If you encounter any issues during installation, double-check the prerequisites and ensure that all steps were followed correctly. Happy banking with MartianBank!
 
@@ -254,7 +254,7 @@ That's it! You now have MartianBank installed and running on your Minikube clust
 
 <br />
 
-##  3. Installatioin on Kind Cluster
+##  3. Installation on Kind Cluster
 
 **`Warning:`**  _Kind Cluster, by default, does not support the LoadBalancer type service with external IPs [[Load balancer external-ip pending · Issue #411 · kubernetes-sigs/kind (github.com)](https://github.com/kubernetes-sigs/kind/issues/411)]. This means that if you want to access services using an external IP in the Kind cluster, you will need to use an alternative approach. If you does not know how to resolove it, please follow the minikube or docker desktop kubernetes tutorials for installation setup._
   
