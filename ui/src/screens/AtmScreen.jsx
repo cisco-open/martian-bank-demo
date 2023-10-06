@@ -27,8 +27,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import "leaflet/dist/leaflet.css";
 import "../index.css";
-// import mapIcon from "../assets/coin.png";
-// import mapImg from "../assets/mapPlanets.png";
+import mapIcon from "../assets/coin-side.png";
+import mapImg from "../assets/atm.png";
 
 const AtmScreen = () => {
   const [location, setLocation] = useState("");
@@ -205,7 +205,7 @@ const AtmScreen = () => {
                         >
                           <span style={{ marginRight: "7px" }}>
                             <img
-                              src="./src/assets/coin.png"
+                              src="./src/assets/coin-front.png"
                               alt="logo"
                               width="45"
                               height="45"
@@ -275,8 +275,8 @@ const AtmScreen = () => {
               <Col md={6}>
                 <div className="map-container">
                   <img
-                    // src={mapImg}
-                    src="https://via.placeholder.com/400x400"
+                    src={mapImg}
+                    // src="https://via.placeholder.com/400x400"
                     alt="Map"
                     className="rounded"
                     style={{ height: "57vh", width: "67vh" }}
@@ -301,8 +301,8 @@ const AtmScreen = () => {
                           atm.coordinates.longitude,
                         ]}
                         icon={L.icon({
-                          // iconUrl: mapIcon,
-                          iconUrl: "https://via.placeholder.com/45x45",
+                          iconUrl: mapIcon,
+                          // iconUrl: "https://via.placeholder.com/45x45",
                           iconSize: [45, 45],
                           iconAnchor: [22.5, 45],
                           popupAnchor: [0, -45],
