@@ -1,2 +1,2 @@
-locust
 Faker
+locust
