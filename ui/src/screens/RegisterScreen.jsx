@@ -77,9 +77,9 @@ const RegisterScreen = () => {
   return (
     <Container>
       <Row className="bg-white rounded" style={{ marginTop: "5vh" }}>
-        <Col md={5} className="rounded p-5" style={{ margin: "2vh" }}>
+        <Col md={5} xs={12} className="rounded p-5" style={{ margin:window.innerWidth >= 768? "2vh":"0.0vh" }}>
           <Row>
-            <Col md={12} className="rounded card border p-5">
+            <Col md={12} className="rounded card border" style={{padding:window.innerWidth >= 768?"5rem":"2rem"}}>
               <h4
                 className="bg-light mx-3"
                 style={{
@@ -161,9 +161,9 @@ const RegisterScreen = () => {
             </Col>
           </Row>
         </Col>
-        <Col md={6} className="rounded p-5" style={{ margin: "2vh" }}>
+        <Col md={6} className="rounded p-5" style={{ margin:window.innerWidth >= 768? "2vh":"0.0vh" }}>
           <Row>
-            <Col md={12} className="p-5">
+            <Col md={12} xs={12} className="" style={{padding:window.innerWidth >= 768?"5rem":"0rem"}}>
               <h1 className="text-center">$100 bonus on us!</h1>
               <p className="text-center">
                 Open an eligible account with qualifying electronic deposits and
