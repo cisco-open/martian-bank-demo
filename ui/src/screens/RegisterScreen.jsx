@@ -40,38 +40,16 @@ const RegisterScreen = () => {
 
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
-    } else {
-      try {
-        const res = await register({ name, email, password }).unwrap();
-        console.log(res);
-        dispatch(setCredentials({ ...res }));
-        toast.success(
-          "Congratulations! Your account with Martian Bank has been created.",
-          {
-            className: "toast-container-custom",
-            autoClose: 500,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          }
-        );
-        navigate("/login");
-      } catch (err) {
-        console.log(err);
-        toast.error(err?.data?.message || err.error, {
-          className: "toast-container-custom",
-          autoClose: 500,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      }
+      return;
+    }
+
+    try {
+      const res = await register({ name, email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      toast.success("Congratulations! Your account has been created.");
+      navigate("/login");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
     }
   };
   return (

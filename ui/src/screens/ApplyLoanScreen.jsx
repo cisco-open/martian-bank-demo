@@ -170,16 +170,7 @@ const ApplyLoan = () => {
 
   return (
     <FormContainer>
-      <h4
-        className="bg-light mx-3"
-        style={{
-          textAlign: "center",
-          paddingTop: "2vh",
-          paddingBottom: "2vh",
-        }}
-      >
-        Loan Application
-      </h4>
+      <h4 className="loan-application-heading">Loan Application</h4>
       {isLoading ? (
         <Loader />
       ) : (
@@ -473,10 +464,9 @@ const ApplyLoan = () => {
           <Row>
             <Col md={6}>
               <Button
-                style={{ width: "100%" }}
+                className="wide-button mt-5 mr-3"
                 type="submit"
                 variant="dark"
-                className="mt-5 mr-3"
               >
                 Apply
               </Button>
@@ -484,9 +474,8 @@ const ApplyLoan = () => {
             <Col md={6}>
               <Link to="/loan">
                 <Button
-                  style={{ width: "100%" }}
+                  className="wide-button mt-5"
                   variant="dark"
-                  className="mt-5"
                 >
                   Cancel
                 </Button>
