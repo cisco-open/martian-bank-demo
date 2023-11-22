@@ -23,26 +23,25 @@ import "../index.css";
 
 const TransactionScreen = () => {
   const dispatch = useDispatch();
-
   const { userInfo } = useSelector((state) => state.auth);
-
-  const [allAccounts, setAllAccounts] = useState([]);
-
   const [selectedAccount, setSelectedAccount] = useState("");
   const [history, setHistory] = useState([]);
-
   const [getTransactions, { isLoading }] = useGetTransactionsMutation();
-  const [getAllAccounts, { isLoading: isLoading1 }] =
-    useGetAllAccountsMutation();
+  const [getAllAccounts, { isLoading: isLoading1 }] = useGetAllAccountsMutation();
+
+  useEffect(() => {
+    fetchAccounts();
+  }, []);
 
   const fetchHistory = async (e) => {
-    setSelectedAccount(e.target.value);
-    e.preventDefault();
+    const accountNumber = e.target.value;
+    setSelectedAccount(accountNumber);
+    if (!accountNumber || accountNumber === "Select Account") return;
+
     try {
       const data = new FormData();
-      data.append("account_number", e.target.value);
+      data.append("account_number", accountNumber);
       const res = await getTransactions(data).unwrap();
-      console.log(res)
       dispatch(storeTransaction(res));
       setHistory(res.response);
     } catch (err) {
@@ -60,18 +59,13 @@ const TransactionScreen = () => {
   };
 
   const fetchAccounts = async () => {
-    const acc_data = new FormData();
-    acc_data.append("email_id", userInfo.email);
-    const res = await getAllAccounts(acc_data).unwrap();
-    dispatch(getAccounts(res));
-    setAllAccounts(res.response);
-  };
-
-  useEffect(() => {
     try {
-      fetchAccounts();
+      const acc_data = new FormData();
+      acc_data.append("email_id", userInfo.email);
+      const res = await getAllAccounts(acc_data).unwrap();
+      dispatch(getAccounts(res));
+      setAllAccounts(res.response);
     } catch (err) {
-      console.log(err);
       toast.error("Error in fetching accounts!", {
         className: "toast-container-custom",
         autoClose: 500,
@@ -83,7 +77,7 @@ const TransactionScreen = () => {
         theme: "dark",
       });
     }
-  }, []);
+  };
 
   return (
     <Container fluid style={{ overflowY: "auto", marginTop: "10vh" }}>

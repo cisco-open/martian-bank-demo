@@ -4,34 +4,32 @@
  * license that can be found in the LICENSE file.
  */
 
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import { toast } from "react-toastify";
-import { LinkContainer } from "react-router-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useLogoutMutation } from "../slices/usersApiSlice";
-import { logout } from "../slices/authSlice";
-import "../index.css";
+import React from 'react';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../slices/usersApiSlice';
+import { logout } from '../slices/authSlice';
+import '../index.css';
 
-const CustomNavItems = ({ name, link }) => {
-  return (
-    <Nav.Item style={{ marginRight: 20 }}>
-      <LinkContainer to={link}>
-        <Nav.Link className="text-white">
-          <span style={{ fontSize: "2vh" }}>{name}</span>
-        </Nav.Link>
-      </LinkContainer>
-    </Nav.Item>
-  );
-};
+const CustomNavItems = ({ name, link }) => (
+  <Nav.Item style={{ marginRight: 20 }}>
+    <LinkContainer to={link}>
+      <Nav.Link className="text-white">
+        <span style={{ fontSize: '2vh' }}>{name}</span>
+      </Nav.Link>
+    </LinkContainer>
+  </Nav.Item>
+);
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [logoutApiCall] = useLogoutMutation();
+
 
   const logoutHandler = async () => {
     try {

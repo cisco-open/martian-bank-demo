@@ -49,18 +49,8 @@ const AccInfoScreen = () => {
 
   return (
     <FormContainer>
-      <h4
-        className="bg-light mx-3"
-        style={{
-          textAlign: "center",
-          paddingTop: "2vh",
-          paddingBottom: "2vh",
-          marginBottom: "3vh",
-        }}
-      >
-        Account Information
-      </h4>
-
+      <h4 className="acc-info-heading">Account Information</h4>
+      
       <Form>
         <Row>
           <Col md={4}>
@@ -168,12 +158,11 @@ const AccInfoScreen = () => {
         <Row className="my-4">
           <Col md={6}>
             <Button
-              disabled={isLoading}
-              style={{ width: "100%" }}
+              // Remove disabled={isLoading} if isLoading is not being used
+              className="wide-button mt-3 mr-3"
               type="submit"
               onClick={submitHandler}
               variant="dark"
-              className="mt-3 mr-3"
             >
               Submit
             </Button>
@@ -181,11 +170,9 @@ const AccInfoScreen = () => {
           <Col md={6}>
             <Link to="/">
               <Button
-                disabled={isLoading}
-                style={{ width: "100%" }}
-                type="submit"
+                className="wide-button mt-3 mr-3"
+                type="button" // Changed from 'submit' to 'button'
                 variant="dark"
-                className="mt-3 mr-3"
               >
                 Go Back
               </Button>
@@ -194,7 +181,7 @@ const AccInfoScreen = () => {
         </Row>
       </Form>
 
-      {isLoading && <Loader />}
+      {/* isLoading && <Loader /> */}
     </FormContainer>
   );
 };

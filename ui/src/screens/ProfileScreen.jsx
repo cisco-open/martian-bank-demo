@@ -23,67 +23,39 @@ const ProfileScreen = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { userInfo } = useSelector((state) => state.auth);
-
   const [updateProfile, { isLoading }] = useUpdateUserMutation();
 
   useEffect(() => {
-    setName(userInfo.name);
-    setEmail(userInfo.email);
-  }, [userInfo.email, userInfo.name]);
+    if (userInfo) {
+      setName(userInfo.name);
+      setEmail(userInfo.email);
+    }
+  }, [userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
-    } else {
-      try {
-        const res = await updateProfile({
-          name: name,
-          email: email,
-          password: password,
-          // token: Cookies.get("jwt"),
-        }).unwrap();
-        dispatch(setCredentials(res));
-        toast.success("Your profile has been updated", {
-          className: "toast-container-custom",
-          autoClose: 500,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-        navigate("/");
-      } catch (err) {
-        toast.error(err?.data?.message || err.error, {
-          className: "toast-container-custom",
-          autoClose: 500,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      }
+      return;
+    }
+
+    try {
+      const res = await updateProfile({
+        name,
+        email,
+        password,
+      }).unwrap();
+      dispatch(setCredentials(res));
+      toast.success("Your profile has been updated");
+      navigate("/");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
     }
   };
   return (
     <FormContainer>
-      <h4
-        className="bg-light mx-3"
-        style={{
-          textAlign: "center",
-          paddingTop: "1.5vh",
-          paddingBottom: "1.5vh",
-        }}
-      >
-        UPDATE &nbsp; DETAILS
-      </h4>
-
+      <h4 className="profile-header">UPDATE &nbsp; DETAILS</h4>
       <Form onSubmit={submitHandler}>
         <Form.Group className="my-4" controlId="name">
           <Form.Label>Name</Form.Label>
