@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 venv_bankapp
+^
 dist
 dist-ssr
 *.local

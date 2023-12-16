@@ -151,6 +151,7 @@ const AtmScreen = () => {
                 label="Open Now"
                 className="py-2 px-5"
                 name="optionGroup"
+                style={{color:"white"}}
                 checked={isOpenNow}
                 onChange={() => {
                   setIsOpenNow(true);
@@ -163,6 +164,7 @@ const AtmScreen = () => {
                 label="Inter planet ATMs"
                 className="py-1 px-5"
                 name="optionGroup"
+                style={{color:"white"}}
                 checked={isInterPlanetary}
                 onChange={() => {
                   setIsInterPlanetary(true);
@@ -177,9 +179,9 @@ const AtmScreen = () => {
 
       {atmsList && atmsList.length > 0 ? (
         <div className="mt-2">
-          <h5 className="mb-4">Showing results for {finalLocation}:</h5>
+          <h5 className="mb-4" style={{color:"white"}}>Showing results for {finalLocation}:</h5>
           <Row>
-            <Col md={6}>
+            <Col md={6} xs={12}>
               <div className="card-container">
                 {atmsList.map((atm, index) => (
                   <Card
@@ -191,8 +193,8 @@ const AtmScreen = () => {
                       bg={atm.isOpen ? "success" : "danger"}
                       style={{
                         position: "absolute",
-                        top: "1rem",
-                        right: "1rem",
+                        top:window.innerWidth >= 570 ? "1rem":"3.7rem",
+                        right: "0.5rem",
                         fontSize: "15px",
                       }}
                     >
@@ -201,9 +203,9 @@ const AtmScreen = () => {
                     <div className="flex-grow-1">
                       <Card.Body style={{ marginTop: "0" }}>
                         <Card.Title
-                          style={{ fontSize: "2.5vh", marginTop: "0" }}
+                          style={{ fontSize:window.innerWidth >= 570 ? "2.5vh":"2.2vh", marginTop: "0" }}
                         >
-                          <span style={{ marginRight: "7px" }}>
+                          <span style={{ marginRight: "5px" }}>
                             <img
                               src="./src/assets/coin-front.png"
                               alt="logo"
@@ -225,7 +227,7 @@ const AtmScreen = () => {
                           )}
                         </Card.Title>
                         <Card.Text
-                          style={{ fontSize: "1.5vh", marginLeft: "52px" }}
+                          style={{ fontSize: "1.5vh", marginLeft: window.innerWidth >= 570 ?"52px":"30px" }}
                         >
                           {atm.address.street +
                             ", " +
@@ -272,25 +274,26 @@ const AtmScreen = () => {
               </div>
             </Col>
             {isInterPlanetary ? (
-              <Col md={6}>
-                <div className="map-container">
+              <Col md={6} xs={12} >
+                <div className="map-container" >
                   <img
                     src={mapImg}
                     // src="https://via.placeholder.com/400x400"
                     alt="Map"
                     className="rounded"
-                    style={{ height: "57vh", width: "67vh" }}
+                    style={{ height: window.innerWidth >= 570 ?"100%":"100%", width: window.innerWidth >= 570 ?"100%":"100%" }}
                   />
                 </div>
               </Col>
             ) : (
-              <Col md={6}>
-                <div className="map-container">
+              <Col md={6} xs={12} >
+                <div className="map-container" style={{width:"100%"}}>
                   <MapContainer
                     center={[37.77175, -81.1901]}
                     zoom={15}
                     scrollWheelZoom={false}
                     className="rounded"
+                    style={{width:window.innerWidth >= 570 ?"100%":"100%"}}
                   >
                     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                     {atmsList.map((atm, index) => (

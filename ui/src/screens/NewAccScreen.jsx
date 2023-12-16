@@ -104,9 +104,9 @@ const NewAccScreen = () => {
       <Container>
         <Row className="bg-white rounded" style={{ marginTop: "5vh" }}>
           {/* Left Column */}
-          <Col md={5} className="rounded p-5">
+          <Col md={5} className="rounded " style={{padding:window.innerWidth>=570?"3rem":"2.5rem"}}>
             <Row>
-              <Col md={12} className="rounded card border p-5">
+              <Col md={12} className="rounded card border " style={{padding:window.innerWidth>=570?"3rem":"0.5rem"}}>
                 <h4
                   className="bg-light mx-3"
                   style={{
@@ -291,9 +291,9 @@ const NewAccScreen = () => {
           </Col>
 
           {/* Right Column */}
-          <Col md={6} className="rounded p-5" style={{ margin: "2vh" }}>
+          <Col md={6} className="rounded "  style={{ margin: window.innerWidth>=570?"2vh":"0vh" ,padding:window.innerWidth>=570?"3rem":"0.0rem"}}>
             <Row>
-              <Col md={12} className="p-5">
+              <Col md={12} className="" style={{padding:window.innerWidth>=570?"3rem":"0.5rem"}}>
                 <h1 className="text-center">$100 bonus on us!</h1>
                 <p className="text-center">
                   Open an eligible account with qualifying electronic deposits

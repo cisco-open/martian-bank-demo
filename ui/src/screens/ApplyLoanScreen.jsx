@@ -169,13 +169,13 @@ const ApplyLoan = () => {
   }, []);
 
   return (
-    <FormContainer>
+    <FormContainer style={{padding:"0rem"}}>
       <h4
         className="bg-light mx-3"
         style={{
           textAlign: "center",
-          paddingTop: "2vh",
-          paddingBottom: "2vh",
+          paddingTop: window.innerWidth>=570?"2vh":"0vh",
+          paddingBottom:window.innerWidth>=570?"2vh":"0vh",
         }}
       >
         Loan Application
@@ -183,8 +183,8 @@ const ApplyLoan = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <Form noValidate validated={validated} onSubmit={submitHandler}>
-          <Row className="mt-4">
+        <Form noValidate validated={validated} onSubmit={submitHandler} style={{padding:0}}>
+          <Row className="" style={{marginTop:window.innerWidth>=570?"4px":"0vh"}}>
             <Col md={6}>
               <Form.Group className="my-3" controlId="name">
                 <Form.Label>Name</Form.Label>

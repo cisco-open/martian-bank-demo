@@ -72,13 +72,13 @@ const ProfileScreen = () => {
     }
   };
   return (
-    <FormContainer>
+    <FormContainer >
       <h4
         className="bg-light mx-3"
         style={{
           textAlign: "center",
-          paddingTop: "1.5vh",
-          paddingBottom: "1.5vh",
+          paddingTop: window.innerWidth>=570?"1.5vh":"0.1vh",
+          paddingBottom: window.innerWidth>=570?"1.5vh":"0.1vh",
         }}
       >
         UPDATE &nbsp; DETAILS
