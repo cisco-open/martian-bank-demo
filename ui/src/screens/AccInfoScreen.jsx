@@ -48,14 +48,14 @@ const AccInfoScreen = () => {
   };
 
   return (
-    <FormContainer>
+    <FormContainer style={{padding:window.innerWidth>=570?"1.5vh":"0.1vh"}}>
       <h4
         className="bg-light mx-3"
         style={{
           textAlign: "center",
-          paddingTop: "2vh",
-          paddingBottom: "2vh",
-          marginBottom: "3vh",
+          paddingTop: window.innerWidth>=570?"2vh":"0vh",
+          paddingBottom: window.innerWidth>=570?"2vh":"0.1vh",
+          marginBottom: window.innerWidth>=570?"3vh":"0.1vh",
         }}
       >
         Account Information

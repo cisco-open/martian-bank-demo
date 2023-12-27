@@ -17,7 +17,7 @@ const Hero = () => {
   return (
     <div className="py-5">
       <Container className="d-flex justify-content-center">
-        <Card className="p-5 d-flex flex-column align-items-center hero-card w-75">
+        <Card className=" d-flex flex-column align-items-center hero-card " style={{width:window.innerWidth>=570?"75%":"100%",padding:window.innerWidth>=570?"5%":"6%"}}>
           <h1 className="text-center mb-4">
             <span style={{ fontSize: "4vh", fontWeight: "bold" }}>
               Welcome to Martian Bank
@@ -29,17 +29,25 @@ const Hero = () => {
             solutions, enjoy top-notch security measures, and fuel your Martian
             ventures with our competitive loans and investment opportunities.
           </p>
-          <div className="d-flex mt-4 mb-4">
+          <div className="d-flex flex-column flex-sm-row mt-4 mb-4">
+          <div style={{marginBottom:window.innerWidth>=570?"":"10px",marginLeft:window.innerWidth>=570?"":"14%"}}>
             <LinkContainer to="/login">
-              <Button variant="dark" className="me-5 px-5 py-2">
+              
+              <Button variant="dark" className="me-5 px-5 py-2" >
                 <span style={{ fontSize: "2vh" }}>Login</span>
               </Button>
+              
             </LinkContainer>
+            </div>
+            <div style={{marginTop:window.innerWidth>=570?"":"10px",marginLeft:window.innerWidth>=570?"":"12%"}}>
             <LinkContainer to="/register">
+              
               <Button variant="dark" className="me-5 px-5 py-2">
                 <span style={{ fontSize: "2vh" }}>Signup</span>
               </Button>
+              
             </LinkContainer>
+            </div>
           </div>
           <div className="d-flex justify-content-around mt-5">
             <Row>

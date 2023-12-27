@@ -119,8 +119,11 @@ const LoanScreen = () => {
                 bg="success"
                 style={{
                   position: "absolute",
-                  top: "1rem",
+                  top:window.innerWidth>=570?"1rem":"1.3rem" ,
                   right: "1rem",
+                  width:window.innerWidth>=570?"60px":"60px",
+                  height:window.innerWidth>=570?"15px":"15px",
+                  fontSize:window.innerWidth>=570?"8px":"8px",
                 }}
               >
                 Eligible
@@ -137,8 +140,11 @@ const LoanScreen = () => {
                 bg="success"
                 style={{
                   position: "absolute",
-                  top: "1rem",
+                  top:window.innerWidth>=570?"1rem":"1.3rem" ,
                   right: "1rem",
+                  width:window.innerWidth>=570?"60px":"60px",
+                  height:window.innerWidth>=570?"15px":"15px",
+                  fontSize:window.innerWidth>=570?"8px":"8px",
                 }}
               >
                 Eligible

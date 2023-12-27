@@ -47,7 +47,7 @@ const FormContainer = ({ children, position }) => {
         </>
       ) : (
         <Row className="justify-content-md-center mt-5">
-          <Col md={6} className="card p-5">
+          <Col md={6} className="card " style={{padding:window.innerWidth>=570?"40px":"15px"}}>
             {children}
           </Col>
         </Row>
