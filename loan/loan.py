@@ -46,7 +46,7 @@ collection_accounts = db["accounts"]
 collection_loans = db["loans"]
 
 class LoanGeneric:
-    def ProcessLoanRequest(self, request_data):
+    def process_loan_request(self, request_data):
         name = request_data["name"]
         email = request_data["email"]
         account_type = request_data["account_type"]
@@ -58,9 +58,9 @@ class LoanGeneric:
         interest_rate = float(request_data["interest_rate"])
         time_period = request_data["time_period"]
         user_account = self.__getAccount(account_number)
-        
         # count = collection_loans.count_documents({"email_id": email, 'account_number': account_number})
-        count =  collection_accounts.count_documents({"email_id": email, 'account_number': account_number})
+        count =  collection_accounts.count_documents({"email_id": email, 
+                                                      'account_number': account_number})
 
         logging.debug(f"user account only based on account number search : {user_account}")
         logging.debug(f"Count whther the email and account exist or not : {count}")
@@ -69,7 +69,6 @@ class LoanGeneric:
         result = self.__approveLoan(user_account, loan_amount)
         logging.debug(f"Result {result}")
         message = "Loan Approved" if result else "Loan Rejected"
-        
         # insert loan request into db
         loan_request = {
             "name": name,
@@ -94,7 +93,7 @@ class LoanGeneric:
         logging.debug(f"Response: {response}")
         return response
 
-    def getLoanHistory(self, request_data):
+    def get_loan_history(self, request_data):
         email = request_data["email"]
         loans = collection_loans.find({"email": email})
         loan_history = []
@@ -119,7 +118,7 @@ class LoanGeneric:
 
         return loan_history
 
-    def __getAccount(self, account_num):
+    def __get_account(self, account_num):
         r = None
         accounts = collection_accounts.find()
         for acc in accounts:
@@ -129,7 +128,7 @@ class LoanGeneric:
         # logging.debug(f"Account {r}")
         return r
 
-    def __approveLoan(self, account, amount):
+    def __approve_loan(self, account, amount):
         if amount < 1:
             return False
 
@@ -148,7 +147,7 @@ class LoanService(loan_pb2_grpc.LoanServiceServicer):
         # enable github copiolot
         self.loan = LoanGeneric()
 
-    def ProcessLoanRequest(self, request, context):
+    def process_loan_request(self, request, context):
         name = request.name
         email = request.email
         account_type = request.account_type
@@ -188,7 +187,7 @@ loan_generic = LoanGeneric()
 def process_loan_request():
     request_data = request.json
     logging.debug(f"Request: {request_data}")
-    response = loan_generic.ProcessLoanRequest(request_data)
+    response = loan_generic.process_loan_requests(request_data)
     return jsonify(response)
 
 
@@ -197,7 +196,7 @@ def get_loan_history():
     logging.debug("----------------> Request: /loan/history")
     d = request.json
     logging.debug(f"Request: {d}")
-    response = loan_generic.getLoanHistory({"email": d['email']})
+    response = loan_generic.get_loan_history({"email": d['email']})
     return jsonify(response)
 
 

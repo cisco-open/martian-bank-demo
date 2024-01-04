@@ -6,98 +6,167 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import loan_pb2 as loan__pb2
+import loan_pb2 
 
+class LoanServiceStub:
+    """
+    Stub for the LoanService gRPC service.
 
-class LoanServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
+    This class provides methods to interact with the gRPC service.
+    """
 
     def __init__(self, channel):
-        """Constructor.
+        """
+        Initialize the LoanServiceStub.
 
         Args:
-            channel: A grpc.Channel.
+            channel (grpc.Channel): A gRPC channel to the server.
         """
-        self.ProcessLoanRequest = channel.unary_unary(
-                '/LoanService/ProcessLoanRequest',
-                request_serializer=loan__pb2.LoanRequest.SerializeToString,
-                response_deserializer=loan__pb2.LoanResponse.FromString,
-                )
-        self.getLoanHistory = channel.unary_unary(
-                '/LoanService/getLoanHistory',
-                request_serializer=loan__pb2.LoansHistoryRequest.SerializeToString,
-                response_deserializer=loan__pb2.LoansHistoryResponse.FromString,
-                )
+        self.process_loan_request = channel.unary_unary(
+            '/LoanService/ProcessLoanRequest',
+            request_serializer=loan_pb2.LoanRequest.SerializeToString,
+            response_deserializer=loan_pb2.LoanResponse.FromString,
+        )
+        self.get_loan_history = channel.unary_unary(
+            '/LoanService/getLoanHistory',
+            request_serializer=loan_pb2.LoansHistoryRequest.SerializeToString,
+            response_deserializer=loan_pb2.LoansHistoryResponse.FromString,
+        )
 
 
-class LoanServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
+class LoanServiceServicer:
+    """
+    Servicer for the LoanService gRPC service.
 
-    def ProcessLoanRequest(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    This class handles incoming requests and provides responses.
+    """
+
+    def process_loan_request(self, request, context):
+        """
+        Process a loan request.
+
+        Args:
+            request: The incoming loan request.
+            context: The gRPC context.
+
+        Raises:
+            NotImplementedError: Indicates the method is not implemented.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def getLoanHistory(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def get_loan_history(self, request, context):
+        """
+        Retrieve loan history.
+
+        Args:
+            request: The request for loan history.
+            context: The gRPC context.
+
+        Raises:
+            NotImplementedError: Indicates the method is not implemented.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_LoanServiceServicer_to_server(servicer, server):
+def add_loan_service_servicer_to_server(servicer, server):
+    """
+    Register the LoanService servicer to a gRPC server.
+
+    Args:
+        servicer (LoanServiceServicer): The servicer to register.
+        server (grpc.Server): The gRPC server.
+    """
     rpc_method_handlers = {
-            'ProcessLoanRequest': grpc.unary_unary_rpc_method_handler(
-                    servicer.ProcessLoanRequest,
-                    request_deserializer=loan__pb2.LoanRequest.FromString,
-                    response_serializer=loan__pb2.LoanResponse.SerializeToString,
-            ),
-            'getLoanHistory': grpc.unary_unary_rpc_method_handler(
-                    servicer.getLoanHistory,
-                    request_deserializer=loan__pb2.LoansHistoryRequest.FromString,
-                    response_serializer=loan__pb2.LoansHistoryResponse.SerializeToString,
-            ),
+        'ProcessLoanRequest': grpc.unary_unary_rpc_method_handler(
+            servicer.process_loan_request,
+            request_deserializer=loan_pb2.LoanRequest.FromString,
+            response_serializer=loan_pb2.LoanResponse.SerializeToString,
+        ),
+        'getLoanHistory': grpc.unary_unary_rpc_method_handler(
+            servicer.get_loan_history,
+            request_deserializer=loan_pb2.LoansHistoryRequest.FromString,
+            response_serializer=loan_pb2.LoansHistoryResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'LoanService', rpc_method_handlers)
+        'LoanService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
+
+
  # This class is part of an EXPERIMENTAL API.
-class LoanService(object):
-    """Missing associated documentation comment in .proto file."""
+import grpc
+from typing import Tuple, Any
+
+# Assuming loan_pb2 is a module containing the necessary gRPC message classes
+import loan_pb2
+
+
+class LoanService:
+    """
+    This class handles loan-related services, including processing loan requests
+    and fetching loan history.
+    """
 
     @staticmethod
-    def ProcessLoanRequest(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/LoanService/ProcessLoanRequest',
-            loan__pb2.LoanRequest.SerializeToString,
-            loan__pb2.LoanResponse.FromString,
+    def process_loan_request(request: loan_pb2.LoanRequest, target: str, 
+                             options: Tuple = (), channel_credentials=None, 
+                             call_credentials=None, insecure: bool = False, 
+                             compression=None, wait_for_ready=None, 
+                             timeout: int = None, metadata: Tuple = None) -> Any:
+        """
+        Processes a loan request.
+
+        :param request: The loan request to be processed.
+        :param target: The target server.
+        :param options: Tuple of options.
+        :param channel_credentials: Channel credentials.
+        :param call_credentials: Call credentials.
+        :param insecure: Boolean flag for insecurity.
+        :param compression: Compression method.
+        :param wait_for_ready: Waiting parameter.
+        :param timeout: Timeout for the request.
+        :param metadata: Additional metadata.
+        :return: gRPC unary-unary call result.
+        """
+        return grpc.experimental.unary_unary(
+            request, target, '/LoanService/ProcessLoanRequest',
+            loan_pb2.LoanRequest.SerializeToString,
+            loan_pb2.LoanResponse.FromString,
             options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata
+        )
 
     @staticmethod
-    def getLoanHistory(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/LoanService/getLoanHistory',
-            loan__pb2.LoansHistoryRequest.SerializeToString,
-            loan__pb2.LoansHistoryResponse.FromString,
+    def get_loan_history(request: loan_pb2.LoansHistoryRequest, target: str, 
+                         options: Tuple = (), channel_credentials=None, 
+                         call_credentials=None, insecure: bool = False, 
+                         compression=None, wait_for_ready=None, 
+                         timeout: int = None, metadata: Tuple = None) -> Any:
+        """
+        Retrieves loan history based on the given request.
+
+        :param request: The request for loan history.
+        :param target: The target server.
+        :param options: Tuple of options.
+        :param channel_credentials: Channel credentials.
+        :param call_credentials: Call credentials.
+        :param insecure: Boolean flag for insecurity.
+        :param compression: Compression method.
+        :param wait_for_ready: Waiting parameter.
+        :param timeout: Timeout for the request.
+        :param metadata: Additional metadata.
+        :return: gRPC unary-unary call result.
+        """
+        return grpc.experimental.unary_unary(
+            request, target, '/LoanService/GetLoanHistory',
+            loan_pb2.LoansHistoryRequest.SerializeToString,
+            loan_pb2.LoansHistoryResponse.FromString,
             options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata
+        )

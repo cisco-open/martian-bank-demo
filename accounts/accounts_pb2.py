@@ -14,30 +14,50 @@ from google.protobuf import symbol_database as _symbol_database
 
 _sym_db = _symbol_database.Default()
 
-
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0e\x61\x63\x63ounts.proto\"\xbf\x01\n\x07\x41\x63\x63ount\x12\x16\n\x0e\x61\x63\x63ount_number\x18\x01 \x01(\t\x12\x10\n\x08\x65mail_id\x18\x02 \x01(\t\x12\x14\n\x0c\x61\x63\x63ount_type\x18\x03 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x04 \x01(\t\x12\x16\n\x0egovt_id_number\x18\x05 \x01(\t\x12\x1a\n\x12government_id_type\x18\x06 \x01(\t\x12\x0c\n\x04name\x18\x07 \x01(\t\x12\x10\n\x08\x63urrency\x18\x08 \x01(\t\x12\x0f\n\x07\x62\x61lance\x18\t \x01(\x01\"\x91\x01\n\x14\x43reateAccountRequest\x12\x10\n\x08\x65mail_id\x18\x01 \x01(\t\x12\x14\n\x0c\x61\x63\x63ount_type\x18\x02 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x03 \x01(\t\x12\x16\n\x0egovt_id_number\x18\x04 \x01(\t\x12\x1a\n\x12government_id_type\x18\x05 \x01(\t\x12\x0c\n\x04name\x18\x06 \x01(\t\"\'\n\x15\x43reateAccountResponse\x12\x0e\n\x06result\x18\x01 \x01(\x08\"&\n\x12GetAccountsRequest\x12\x10\n\x08\x65mail_id\x18\x01 \x01(\t\"1\n\x13GetAccountsResponse\x12\x1a\n\x08\x61\x63\x63ounts\x18\x01 \x03(\x0b\x32\x08.Account\"X\n\rAccountDetail\x12\x16\n\x0e\x61\x63\x63ount_number\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0f\n\x07\x62\x61lance\x18\x03 \x01(\x01\x12\x10\n\x08\x63urrency\x18\x04 \x01(\t\"1\n\x17GetAccountDetailRequest\x12\x16\n\x0e\x61\x63\x63ount_number\x18\x01 \x01(\t2\xd0\x01\n\x15\x41\x63\x63ountDetailsService\x12=\n\x11getAccountDetails\x12\x18.GetAccountDetailRequest\x1a\x0e.AccountDetail\x12>\n\rcreateAccount\x12\x15.CreateAccountRequest\x1a\x16.CreateAccountResponse\x12\x38\n\x0bgetAccounts\x12\x13.GetAccountsRequest\x1a\x14.GetAccountsResponseb\x06proto3')
+DESCRIPTOR = (
+    _descriptor_pool.Default().AddSerializedFile(
+        b'\n\x0e\x61\x63\x63ounts.proto\"\xbf\x01\n\x07\x41\x63\x63ount'
+        b'\x12\x16\n\x0e\x61\x63\x63ount_number\x18\x01 \x01(\t\x12\x10\n\x08'
+        b'\x65mail_id\x18\x02 \x01(\t\x12\x14\n\x0c\x61\x63\x63ount_type\x18\x03 '
+        b'\x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x04 \x01(\t\x12\x16\n\x0e'
+        b'govt_id_number\x18\x05 \x01(\t\x12\x1a\n\x12government_id_type\x18\x06 '
+        b'\x01(\t\x12\x0c\n\x04name\x18\x07 \x01(\t\x12\x10\n\x08\x63urrency\x18\x08 '
+        b'\x01(\t\x12\x0f\n\x07\x62\x61lance\x18\t \x01(\x01\"\x91\x01\n\x14'
+        b'\x43reateAccountRequest\x12\x10\n\x08\x65mail_id\x18\x01 \x01(\t\x12\x14\n\x0c'
+        b'\x61\x63\x63ount_type\x18\x02 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x03 '
+        b'\x01(\t\x12\x16\n\x0egovt_id_number\x18\x04 \x01(\t\x12\x1a\n\x12government_id_type'
+        b'\x18\x05 \x01(\t\x12\x0c\n\x04name\x18\x06 \x01(\t\"\'\n\x15\x43reateAccountResponse'
+        b'\x12\x0e\n\x06result\x18\x01 \x01(\x08\"&\n\x12GetAccountsRequest\x12\x10\n\x08'
+        b'\x65mail_id\x18\x01 \x01(\t\"1\n\x13GetAccountsResponse\x12\x1a\n\x08\x61\x63\x63ounts'
+        b'\x18\x01 \x03(\x0b\x32\x08.Account\"X\n\rAccountDetail\x12\x16\n\x0e\x61\x63\x63ount_number'
+        b'\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0f\n\x07\x62\x61lance\x18\x03 '
+        b'\x01(\x01\x12\x10\n\x08\x63urrency\x18\x04 \x01(\t\"1\n\x17GetAccountDetailRequest\x12\x16'
+        b'\n\x0e\x61\x63\x63ount_number\x18\x01 \x01(\t2\xd0\x01\n\x15\x41\x63\x63ountDetailsService'
+        b'\x12=\n\x11getAccountDetails\x12\x18.GetAccountDetailRequest\x1a\x0e.AccountDetail'
+        b'\x12>\n\rcreateAccount\x12\x15.CreateAccountRequest\x1a\x16.CreateAccountResponse'
+        b'\x12\x38\n\x0bgetAccounts\x12\x13.GetAccountsRequest\x1a\x14.GetAccountsResponseb\x06proto3'
+    )
+)
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'accounts_pb2', globals())
-if _descriptor._USE_C_DESCRIPTORS == False:
+if _descriptor._USE_C_DESCRIPTORS is False:
 
-  DESCRIPTOR._options = None
-  _ACCOUNT._serialized_start=19
-  _ACCOUNT._serialized_end=210
-  _CREATEACCOUNTREQUEST._serialized_start=213
-  _CREATEACCOUNTREQUEST._serialized_end=358
-  _CREATEACCOUNTRESPONSE._serialized_start=360
-  _CREATEACCOUNTRESPONSE._serialized_end=399
-  _GETACCOUNTSREQUEST._serialized_start=401
-  _GETACCOUNTSREQUEST._serialized_end=439
-  _GETACCOUNTSRESPONSE._serialized_start=441
-  _GETACCOUNTSRESPONSE._serialized_end=490
-  _ACCOUNTDETAIL._serialized_start=492
-  _ACCOUNTDETAIL._serialized_end=580
-  _GETACCOUNTDETAILREQUEST._serialized_start=582
-  _GETACCOUNTDETAILREQUEST._serialized_end=631
-  _ACCOUNTDETAILSSERVICE._serialized_start=634
-  _ACCOUNTDETAILSSERVICE._serialized_end=842
+    DESCRIPTOR._options = None
+    _ACCOUNT._serialized_start=19
+    _ACCOUNT._serialized_end=210
+    _CREATEACCOUNTREQUEST._serialized_start=213
+    _CREATEACCOUNTREQUEST._serialized_end=358
+    _CREATEACCOUNTRESPONSE._serialized_start=360
+    _CREATEACCOUNTRESPONSE._serialized_end=399
+    _GETACCOUNTSREQUEST._serialized_start=401
+    _GETACCOUNTSREQUEST._serialized_end=439
+    _GETACCOUNTSRESPONSE._serialized_start=441
+    _GETACCOUNTSRESPONSE._serialized_end=490
+    _ACCOUNTDETAIL._serialized_start=492
+    _ACCOUNTDETAIL._serialized_end=580
+    _GETACCOUNTDETAILREQUEST._serialized_start=582
+    _GETACCOUNTDETAILREQUEST._serialized_end=631
+    _ACCOUNTDETAILSSERVICE._serialized_start=634
+    _ACCOUNTDETAILSSERVICE._serialized_end=842
 # @@protoc_insertion_point(module_scope)

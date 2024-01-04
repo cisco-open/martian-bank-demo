@@ -1,63 +1,62 @@
 # Copyright (c) 2023 Cisco Systems, Inc. and its affiliates All rights reserved.
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
+"""
+# dashboard.py
+
+This module implements a Flask application with various routes for handling
+different functionalities, including account management, transactions, and
+integration with gRPC services.
+"""
 
 import os
 import logging
 import json
-
-# from google.protobuf.json_format import MessageToDict
 from flask_cors import CORS
-
 from flask import Flask, render_template, request, jsonify
 import grpc
-
 from dotenv import load_dotenv
-load_dotenv()
-
-from accounts_pb2 import *
-from accounts_pb2_grpc import *
-
-from transaction_pb2_grpc import *
-from transaction_pb2 import *
-
-from loan_pb2_grpc import LoanServiceStub
-from loan_pb2 import *
-
 from pymongo.mongo_client import MongoClient
-
 import requests as flask_client_requests
 
-# set logging to debug
+# Specific imports from the protobuf-generated files
+from accounts_pb2 import CreateAccountRequest, GetAccountDetailRequest, GetAccountsRequest
+from accounts_pb2_grpc import AccountDetailsServiceStub
+from transaction_pb2 import TransactionRequest, ZelleRequest, TransactionByIDRequest, GetALLTransactionsRequest
+from transaction_pb2_grpc import TransactionServiceStub
+from loan_pb2 import LoanRequest, LoansHistoryRequest
+from loan_pb2_grpc import LoanServiceStub
+
+load_dotenv()
+
+# Set logging to debug
 logging.basicConfig(level=logging.DEBUG)
 
-
-# db_host = os.getenv("DATABASE_HOST", "localhost")
 db_url = os.getenv("DB_URL")
 if db_url is None:
     raise Exception("DB_URL environment variable is not set")
 
 uri = db_url
+logging.debug("Connecting to MongoDB at %s", uri)
 
-logging.debug(f"Connecting to MongoDB at {uri}")
-
-# protocol = os.getenv('SERVICE_PROTOCOL')
 protocol = os.getenv('SERVICE_PROTOCOL', 'http')
-
 if protocol is None:
     raise Exception("SERVICE_PROTOCOL environment variable is not set")
 
 protocol = protocol.lower()
-logging.debug(f"microservice protocol: {protocol}")
-
+logging.debug("microservice protocol: %s", protocol)
 
 client = MongoClient(uri)
 db = client["bank"]
 collection = db["accounts"]
 
-
 app = Flask(__name__)
 CORS(app)
+
+
+
+
+
 
 
 @app.route("/")
