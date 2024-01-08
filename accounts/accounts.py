@@ -2,232 +2,169 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-from concurrent import futures
+# app.py
+import os
 import random
 import datetime
-import os
+import logging
 import grpc
+from concurrent import futures
+from flask import Flask, request, jsonify
+from pymongo import MongoClient
+from dotenv import load_dotenv
 from accounts_pb2 import *
 import accounts_pb2_grpc
-import logging
 from dotmap import DotMap
-from pymongo.mongo_client import MongoClient
-from flask import Flask, request, jsonify
-# set logging to debug
-logging.basicConfig(level=logging.DEBUG)
 
-from dotenv import load_dotenv
+# Load environment variables
 load_dotenv()
-
-# db_host = os.getenv("DATABASE_HOST", "localhost")
 db_url = os.getenv("DB_URL")
 if db_url is None:
-    raise Exception("DB_URL environment variable is not set")
+    raise ValueError("DB_URL environment variable is not set")
 
+protocol = os.getenv('SERVICE_PROTOCOL', 'http').lower()
+if protocol not in ['http', 'grpc']:
+    raise ValueError("SERVICE_PROTOCOL environment variable must be 'http' or 'grpc'")
 
-# protocol = os.getenv('SERVICE_PROTOCOL')
-protocol = os.getenv('SERVICE_PROTOCOL', 'http')
-if protocol is None:
-    raise Exception("SERVICE_PROTOCOL environment variable is not set")
-
-protocol = protocol.lower()
-logging.debug(f"microservice protocol: {protocol}")
-
-
-uri = db_url
-
-client = MongoClient(uri)
+# Database setup
+client = MongoClient(db_url)
 db = client["bank"]
 collection = db["accounts"]
 
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
 
-class AccountsGeneric:
-    def getAccountDetails(self, request):
+class AccountsService:
+    """
+    Service for handling account operations.
+    """
+
+    def __init__(self):
+        self.collection = collection
+
+    def get_account_details(self, account_number):
+        """
+        Retrieves account details given an account number.
+
+        Args:
+            account_number (str): The account number.
+
+        Returns:
+            dict: Account details if found, empty dict otherwise.
+        """
         logging.debug("Get Account Details called")
-        account = collection.find_one({"account_number": request.account_number})
+        account = self.collection.find_one({"account_number": account_number})
+        return account if account else {}
 
-      
+    def create_account(self, account_data):
+        """
+        Creates a new account with the provided data.
 
-        if account:
-            return  {'account_number': account["account_number"],'name': account["name"], 'balance': account["balance"], 'currency': account["currency"]}
-    
+        Args:
+            account_data (dict): Data for the new account.
 
-        return {}
-
-    # Todo: check if the account already exist or not
-
-    def createAccount(self, request):
+        Returns:
+            bool: True if account creation is successful, False otherwise.
+        """
         logging.debug("Create Account called")
-        # find the account with email and account type if it already exist then return false
-        count = collection.count_documents(
-            {"email_id": request.email_id, "account_type": request.account_type}
+        # Check if the account already exists
+        existing_count = self.collection.count_documents(
+            {"email_id": account_data.email_id, "account_type": account_data.account_type}
         )
+        if existing_count > 0:
+            logging.debug("Account already exists")
+            return False
 
-        logging.debug(f" count: {count}")
-
-        if count > 0:
-            logging.debug("Account already exist")
-            return False  # CreateAccountResponse(result=False)
-
-        account = {
-            "email_id": request.email_id,
-            "account_type": request.account_type,
-            "address": request.address,
-            "govt_id_number": request.govt_id_number,
-            "government_id_type": request.government_id_type,
-            # "account_holder_name": request.account_holder_name,
-            "name": request.name,
+        new_account = {
+            "email_id": account_data.email_id,
+            "account_type": account_data.account_type,
+            "address": account_data.address,
+            "govt_id_number": account_data.govt_id_number,
+            "government_id_type": account_data.government_id_type,
+            "name": account_data.name,
             "balance": 100,
             "currency": "USD",
+            "account_number": f"IBAN{random.randint(1000000000000000, 9999999999999999)}",
+            "created_at": datetime.datetime.now()
         }
+        self.collection.insert_one(new_account)
+        return True
 
-        # assign a random 16 digit account number
-        account[
-            "account_number"
-        ] = f"IBAN{random.randint(1000000000000000, 9999999999999999)}"
-        # timestamp  the account creation
-        account["created_at"] = datetime.datetime.now()
-        # insert the account into the list of accounts
-        collection.insert_one(account)
-        return True  # CreateAccountResponse(result=True)
+    def get_accounts(self, email_id):
+        """
+        Retrieves all accounts for a given email ID.
 
-    def getAccounts(self, request):
-        email_id = request.email_id
-        accounts = collection.find({"email_id": email_id})
-        account_list = []
-        for account in accounts:
-            # logging.debug(account["balance"])
-            # account_list.append(
-            #     Account(
-            #         account_number=account["account_number"],
-            #         email_id=account["email_id"],
-            #         account_type=account["account_type"],
-            #         address=account["address"],
-            #         govt_id_number=account["govt_id_number"],
-            #         government_id_type=account["government_id_type"],
-            #         name=account["name"],
-            #         balance=account["balance"],
-            #         currency=account["currency"],
-            #     )
-            # )
-            acc = {
-                k: v
-                for k, v in account.items()
-                if k
-                in [
-                    "account_number",
-                    "email_id",
-                    "account_type",
-                    "address",
-                    "govt_id_number",
-                    "government_id_type",
-                    "name",
-                    "balance",
-                    "currency",
-                ]
-            }
-            account_list.append(acc)
+        Args:
+            email_id (str): Email ID to search for accounts.
 
-        return account_list
+        Returns:
+            list: A list of accounts associated with the email ID.
+        """
+        accounts = self.collection.find({"email_id": email_id})
+        return [acc for acc in accounts if acc is not None]
 
 
 class AccountDetailsService(accounts_pb2_grpc.AccountDetailsServiceServicer):
+    """
+    gRPC service for account details.
+    """
+
     def __init__(self):
-        self.accounts = AccountsGeneric()
+        self.service = AccountsService()
 
-    def getAccountDetails(self, request, context):
-
-        logging.debug("Get Account Details called")
-
-        account = self.accounts.getAccountDetails(request)
-
-        if len(account) > 0:
-            return AccountDetail(
-               account_number=account["account_number"],
-                name=account["name"],
-                balance=account["balance"],
-                currency=account["currency"],
-            )
+    def get_account_details(self, request, context):
+        account = self.service.get_account_details(request.account_number)
+        if account:
+            return AccountDetail(**account)
         return AccountDetail()
 
-    def createAccount(self, request, context):
-        # return self.accounts.createAccount(request)
-        result = self.accounts.createAccount(request)
+    def create_account(self, request, context):
+        result = self.service.create_account(request)
         return CreateAccountResponse(result=result)
 
-    def getAccounts(self, request, context):
-        # return self.accounts.getAccounts(request)
-        accounts = self.accounts.getAccounts(request)
-        account_list = []
-        for account in accounts:
-            account_list.append(
-                Account(
-                    account_number=account["account_number"],
-                    email_id=account["email_id"],
-                    account_type=account["account_type"],
-                    address=account["address"],
-                    govt_id_number=account["govt_id_number"],
-                    government_id_type=account["government_id_type"],
-                    name=account["name"],
-                    balance=account["balance"],
-                    currency=account["currency"],
-                )
-            )
-        return GetAccountsResponse(accounts=account_list)
+    def get_accounts(self, request, context):
+        accounts = self.service.get_accounts(request.email_id)
+        return GetAccountsResponse(accounts=[Account(**acc) for acc in accounts])
 
 
+# Flask App Setup
 app = Flask(__name__)
-accounts_generic = AccountsGeneric()
+accounts_service = AccountsService()
+
 @app.route("/account-detail", methods=["POST"])
-def getAccountDetails():
-    data = request.json
-    data = DotMap(data)
-    # account_number = request.json["account_number"]
-    account = accounts_generic.getAccountDetails(data)
+def get_account_details():
+    data = DotMap(request.json)
+    account = accounts_service.get_account_details(data.account_number)
     return jsonify(account)
 
 @app.route("/create-account", methods=["POST"])
-def createAccount():
-    data = request.json
-    data = DotMap(data)
-    result = accounts_generic.createAccount(data)
-    return jsonify(result)
+def create_account():
+    data = DotMap(request.json)
+    result = accounts_service.create_account(data)
+    return jsonify(result=result)
 
 @app.route("/get-all-accounts", methods=["POST"])
-def getAccounts():
-    data = request.json
-    data = DotMap(data)
-    accounts = accounts_generic.getAccounts(data)
+def get_accounts():
+    data = DotMap(request.json)
+    accounts = accounts_service.get_accounts(data.email_id)
     return jsonify(accounts)
 
 
-
-def serverFlask(port):
-    logging.debug(f"Starting Flask server on port {port}")
-    app.run(host='0.0.0.0' ,port=port, debug=True)    
-
-
-def serverGRPC(port):
-    # recommendations_host = os.getenv("RECOMMENDATIONS_HOST", "localhost")
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    accounts_pb2_grpc.add_AccountDetailsServiceServicer_to_server(
-        AccountDetailsService(), server
-    )
-    server.add_insecure_port(f"[::]:{port}")
-    # server.add_insecure_port(f"{recommendations_host}:50051")
-    # print server ip and port
-    logging.debug(f"Server started at port {port}")
-    # print IP
-    server.start()
-    server.wait_for_termination()
-
-
+def run_server():
+    port = 50051
+    if protocol == "grpc":
+        server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+        accounts_pb2_grpc.add_AccountDetailsServiceServicer_to_server(
+            AccountDetailsService(), server
+        )
+        server.add_insecure_port(f"[::]:{port}")
+        logging.debug(f"gRPC server starting on port {port}")
+        server.start()
+        server.wait_for_termination()
+    else:
+        logging.debug(f"Flask server starting on port {port}")
+        app.run(host='0.0.0.0', port=port, debug=True)
 
 
 if __name__ == "__main__":
-    port = 50051
-    # serverGRPC(port)
-    if protocol == "grpc":
-        serverGRPC(port)
-    else:
-        serverFlask(port)
+    run_server()
