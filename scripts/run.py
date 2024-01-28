@@ -3,7 +3,6 @@ import subprocess
 import time
 import shutil
 import platform
-#######################################################################################
 
 # Check for Dependencies
 if not shutil.which("node"):
